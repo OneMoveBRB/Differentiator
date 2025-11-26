@@ -1,0 +1,12 @@
+digraph Tree {
+	rankdir=HR;
+	node [shape=record, style=filled, fillcolor=lightblue];
+	edge [fontsize=10,  color=black];
+
+	node1 [label="{{{<f0> 0x504000000190 | <f1> type = NUMBER | <f2> data = 1}} | { <f3> left: (nil) | <f4> right: (nil)}}"];
+	node2 [label="{{{<f0> 0x5040000001d0 | <f1> type = NUMBER | <f2> data = 1}} | { <f3> left: (nil) | <f4> right: (nil)}}"];
+	node3 [label="{{{<f0> 0x504000000150 | <f1> type = OPERATION | <f2> data = +}} | { <f3> left: 0x504000000190 | <f4> right: 0x5040000001d0}}"];
+	node3:f3 -> node1 [color=red, dir=both, arrowhead=normal];
+	node3:f4 -> node2 [color=green, dir=both, arrowhead=normal];
+	
+}
