@@ -18,14 +18,41 @@ struct OperationMapping {
     const char* value;
     Operation_t operation;
 };
-
+/*!SECTION
+OPERATION_SQRT,
+    OPERATION_LN,
+    OPERATION_LOG,
+    OPERATION_SIN,
+    OPERATION_COS,
+    OPERATION_TAN,
+    OPERATION_COT,
+    OPERATION_SINH,
+    OPERATION_COSH,
+    OPERATION_TANH,
+    OPERATION_COTH
+*/
 OperationMapping bin_ops[] = {
-    {"U",   UNDEFINED_OPERATION},
-    {"+",   ADDITION},
-    {"-",   SUBTRACTION},
-    {"*",   MULTIPLICATION},
-    {"/",   DIVISION},
-    {"^",   EXPONENTIATION}
+    {"U",       OPERATION_UNDEF},
+    {"+",       OPERATION_ADD},
+    {"-",       OPERATION_SUB},
+    {"*",       OPERATION_MUL},
+    {"/",       OPERATION_DIV},
+    {"^",       OPERATION_EXP},
+    {"sqrt",    OPERATION_SQRT},
+    {"ln",      OPERATION_LN},
+    {"log",     OPERATION_LOG},
+    {"sin",     OPERATION_SIN},
+    {"cos",     OPERATION_COS},
+    {"tan",     OPERATION_TAN},
+    {"cot",     OPERATION_COT},
+    {"sinh",    OPERATION_SINH},
+    {"cosh",    OPERATION_COSH},
+    {"tanh",    OPERATION_TANH},
+    {"coth",    OPERATION_COTH},
+    {"arcsin",  OPERATION_ASIN},
+    {"arccos",  OPERATION_ACOS},
+    {"arctan",  OPERATION_ATAN},
+    {"arccot",  OPERATION_ACOT},
 };
 
 size_t bin_ops_size = sizeof(bin_ops)/sizeof(bin_ops[0]);
@@ -107,7 +134,7 @@ char* GetStringFromBuffer(char** position) {
     return NodeName;
 }
 
-IOErr_t DefineTreeElem(TreeElemType_t* type, TreeElem_t* data, char* str) {
+IOErr_t DefineTreeElem(TreeElemType* type, TreeElem_t* data, char* str) {
     assert( str != NULL );
 
     for (size_t i = 0; i < bin_ops_size; i++) {
@@ -188,23 +215,28 @@ char* StrFromDouble(double x) {
 
 double GetFuncOp(Operation_t operation, double a, double b) {
     switch (operation) {
-    case ADDITION:
+    case OPERATION_ADD:
         return a + b;
 
-    case SUBTRACTION:
+    case OPERATION_SUB:
         return a - b;
 
-    case MULTIPLICATION:
+    case OPERATION_MUL:
         return a * b;
 
-    case DIVISION:
+    case OPERATION_DIV:
         return a / b;
 
-    case EXPONENTIATION:
+    case OPERATION_EXP:
         return pow(a, b);
     
-    case UNDEFINED_OPERATION:
+    case OPERATION_UNDEF:
         fprintf(stderr, "UNDEFINED_OPERATION IN GetFuncOp\n");
+        break;
+
+    default:
+        fprintf(stderr, "default in GetFuncOp\n");
+        break;
     }
 
     return 0;
