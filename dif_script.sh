@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source="g++ main.cpp tree.cpp io.cpp dump.cpp -o dif"
+source="g++ main.cpp tree.cpp io.cpp dif_math.cpp dif_optimize.cpp dump.cpp utils.cpp -o dif"
 
 flags=" \
 -D STACK_MODE=STACK_DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations -Wc++14-compat \
