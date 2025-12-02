@@ -1,28 +1,52 @@
 #include <stdio.h>
 
 #include "tree.h"
+#include "dif_math.h"
+#include "dif_optimize.h"
 #include "dump.h"
 
+
 int main() {
+    // Node_t* node = NodeInit(NULL, NULL, NULL, TYPE_NUMBER, 1.0);
+
+    // printf("%d\n", node->type);
+    // printf("%lg\n", node->data.number);
+
+    // NodeDestroy(&node);
+
     Tree_t* tree = NULL;
     TreeInit(&tree);
 
     ReadTree(tree, "input.txt");
 
-    PrintLatexTree(tree);
+    // PrintLatexTree(tree);
 
-    Tree_t* dif_tree = NULL;
-    TreeInit(&dif_tree);
+    DotVizualizeTree(tree, "img.txt");
+    getchar();
 
-    PrintLatexTree(tree);
-    ConstOptimization(tree->root, tree);
-    PrintLatexTree(tree);
-    // TreeDifferentiation(tree, dif_tree);
-    // PrintLatexTree(dif_tree);    
+    // TreeOptimization(tree, tree->root);
 
-    DotVizualizeTree(dif_tree, "img.txt");
+    // DotVizualizeTree(tree, "img.txt");
+    // getchar();
 
-    TreeDestroy(&dif_tree);
+    Tree_t* tree2 = NULL;
+    TreeInit(&tree2);
+
+    tree2->root = TreeDiff(tree->root, "x");
+    tree2->root->parent = NULL;
+
+    // TreeOptimization(tree2, tree2->root);
+    // TreeOptimization(tree2, tree2->root);
+    // TreeOptimization(tree2, tree2->root);
+    // PrintLatexTree(tree2);
+    PrintTree(tree2);
+
+    DotVizualizeTree(tree2, "img.txt");
+    getchar();
+
+    TreeDestroy(&tree2);
+    
+    
     TreeDestroy(&tree);
     return 0;
 }
