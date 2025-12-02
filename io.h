@@ -28,7 +28,7 @@ IOErr_t BufferInit(Buffer_t* buffer, size_t capacity);
 IOErr_t BufferDestroy(Buffer_t* buffer);
 IOErr_t BufferGet(Buffer_t* buffer);
 
-IOErr_t DefineTreeElem(TreeElemType_t* type, TreeElem_t* data, char* str);
+IOErr_t DefineTreeElem(TreeElemType* type, TreeElem_t* data, char* str);
 
 char* GetStringFromBuffer(char** position);
 void SkipSpaces(char** position);
